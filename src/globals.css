@@ -1,0 +1,68 @@
+:root {
+  --background-color: #1b1b28;
+  --background-color-rgb: 27, 27, 40;
+  --color: white;
+  --color-rgb: 255, 255, 255;
+  --color-op: black;
+  --color-op-rgb: 0, 0, 0;
+
+  --br-sm: 576px;
+  --br-md: 768px;
+  --br-lg: 992px;
+  --br-xl: 1200px;
+  --br-xxl: 1400px;
+  --body: var(--br-xl);
+}
+
+[data-theme='light'] {
+  --background-color: hsl(225, 100%, 96%);
+
+  --color: black;
+  --color-rgb: 0, 0, 0;
+  --color-op: white;
+  --color-op-rgb: 255, 255, 255;
+}
+
+*,
+:after,
+:before {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: system-ui, sans-serif;
+  scroll-behavior: smooth;
+  height: auto !important;
+  width: auto !important;
+  overflow-x: clip;
+}
+
+body {
+  margin: 0px;
+  background-color: var(--background-color);
+  background-size: cover;
+  color: var(--color);
+
+  transition:
+    color 0.2s ease-out,
+    background-color 0.2s ease-out;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #d9d9d9;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #6f6f6f;
+}
