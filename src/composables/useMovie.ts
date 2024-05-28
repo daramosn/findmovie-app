@@ -1,41 +1,52 @@
-import { moviesApi } from '@/api/moviesApi'
+import { getMoviesApi } from '@/api/moviesApi'
 import type { Movie } from '@/types/movieList.interface'
-import { onMounted, ref } from 'vue'
+import { ref, watch } from 'vue'
+import { useRouter } from 'vue-router'
 
 export const useMovies = () => {
+  const router = useRouter()
   const searchInput = ref('')
-  const movies = ref<Movie[]>([])
+  const movies = ref<Partial<Movie>[]>([])
   const isSearching = ref()
   const error = ref(false)
+  const isEmptyList = ref(false)
 
-  const searchMovie = async () => {
-    isSearching.value = true
+  const searchMovie = () => {
+    if (searchInput.value === '') return
+    const route = router.resolve({ path: '/', query: { search: searchInput.value } })
+    router.push(route.fullPath)
+  }
+
+  const fetchMovies = async () => {
     error.value = false
-    const pathName =
-      searchInput.value === '' ? window.location.pathname : `?search=${searchInput.value}`
-    window.history.replaceState({}, '', pathName)
-
+    isSearching.value = true
     try {
-      movies.value = await moviesApi(searchInput.value)
+      movies.value = await getMoviesApi(searchInput.value)
     } catch (e) {
       error.value = true
-      // throw new Error(`Error fetching movies: ${e}`)
     } finally {
       isSearching.value = false
+      isEmptyList.value = movies.value.length === 0 ? true : false
     }
   }
 
-  onMounted(() => {
-    const params = new URLSearchParams(window.location.search)
-    searchInput.value = params.get('search') ?? ''
-    if (searchInput.value !== '') searchMovie()
-  })
+  watch(
+    () => router.currentRoute.value.query.search,
+    () => {
+      if (router.currentRoute.value.query.search) {
+        searchInput.value = `${router.currentRoute.value.query.search}`
+      }
+      if (searchInput.value !== '') fetchMovies()
+    },
+    { immediate: true }
+  )
 
   return {
     movies,
     searchInput,
     isSearching,
     error,
+    isEmptyList,
 
     searchMovie
   }
