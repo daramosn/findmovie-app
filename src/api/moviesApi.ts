@@ -1,11 +1,13 @@
 import type { Movie, Result } from '@/types/movieList.interface'
 
-export const moviesApi = async (searchTerm: string): Promise<Movie[]> => {
-  const token = import.meta.env.VITE_TMDB_TOKEN
+export const getMoviesApi = async (searchTerm: string): Promise<Partial<Movie>[]> => {
   const url = `https://api.themoviedb.org/3/search/movie?query=${searchTerm}`
   const options = {
     method: 'GET',
-    headers: { accept: 'application/json', Authorization: `Bearer ${token}` }
+    headers: {
+      accept: 'application/json',
+      Authorization: `Bearer ${import.meta.env.VITE_TMDB_TOKEN}`
+    }
   }
 
   const response = await fetch(url, options)
@@ -26,5 +28,5 @@ export const moviesApi = async (searchTerm: string): Promise<Movie[]> => {
     }
   })
 
-  return movies as Movie[]
+  return movies as Partial<Movie>[]
 }
