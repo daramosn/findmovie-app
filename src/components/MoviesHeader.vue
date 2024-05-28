@@ -3,15 +3,11 @@
     <nav>
       <h1>Movies app</h1>
     </nav>
-    <div>{{ counter }}</div>
+    <hr />
   </header>
 </template>
 
-<script lang="ts" setup>
-import { ref } from 'vue'
-
-const counter = ref(10)
-</script>
+<script lang="ts" setup></script>
 
 <style>
 .movies-header {
