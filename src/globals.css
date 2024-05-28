@@ -16,7 +16,6 @@
 
 [data-theme='light'] {
   --background-color: hsl(225, 100%, 96%);
-
   --color: black;
   --color-rgb: 0, 0, 0;
   --color-op: white;
