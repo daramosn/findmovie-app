@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="searchbar">
     <h3>Enter movie name</h3>
     <form class="searchform" @submit.prevent="searchMovie">
       <input
@@ -34,29 +34,34 @@ const { isSearching, movies, searchInput, searchMovie, error, isEmptyList } = us
 </script>
 
 <style>
-.searchform {
-  display: flex;
-  gap: 8px;
-  align-items: stretch;
-  margin-block: 48px;
-  input {
-    font-size: 18px;
-    padding: 4px 8px;
-    border: none;
-    border-radius: 6px;
+.searchbar {
+  h3 {
+    font-weight: 450;
   }
-  button {
-    border: none;
-    border-radius: 6px;
-    padding: 4px 8px;
-    font-size: 16px;
-    color: #fff;
-    background: linear-gradient(45deg, rgb(214, 94, 20), #db0000);
-    transition: all 0.1s ease-out;
+  .searchform {
+    display: flex;
+    gap: 8px;
+    align-items: stretch;
+    margin: 16px 0 48px;
+    input {
+      font-size: 18px;
+      padding: 4px 8px;
+      border: none;
+      border-radius: 6px;
+    }
+    button {
+      border: none;
+      border-radius: 6px;
+      padding: 4px 8px;
+      font-size: 16px;
+      color: #fff;
+      background: linear-gradient(45deg, rgb(214, 94, 20), #db0000);
+      transition: all 0.1s ease-out;
 
-    &:hover {
-      scale: 1.05;
-      font-variation-settings: 'wght' 600;
+      &:hover {
+        scale: 1.05;
+        font-variation-settings: 'wght' 600;
+      }
     }
   }
 }
