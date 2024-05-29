@@ -40,6 +40,7 @@ const { isSearching, movies, searchInput, searchMovie, error, isEmptyList } = us
   }
   .searchform {
     display: flex;
+    flex-wrap: wrap;
     gap: 8px;
     align-items: stretch;
     margin: 16px 0 48px;
@@ -48,6 +49,7 @@ const { isSearching, movies, searchInput, searchMovie, error, isEmptyList } = us
       padding: 4px 8px;
       border: none;
       border-radius: 6px;
+      min-width: 180px;
     }
     button {
       border: none;
