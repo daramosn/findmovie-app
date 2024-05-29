@@ -23,7 +23,7 @@ export const router = createRouter({
         },
         {
           path: '/:pathMatch(.*)*',
-          component: () => ErrorPage
+          component: () => import('../pages/ErrorPage.vue')
         }
       ]
     }
