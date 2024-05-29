@@ -1,5 +1,5 @@
 import { getMoviesApi } from '@/api/moviesApi'
-import type { Movie } from '@/types/movieList.interface'
+import type { Movie } from '@/types/movie.interface'
 import { ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 
@@ -7,7 +7,7 @@ export const useMovies = () => {
   const router = useRouter()
   const searchInput = ref('')
   const movies = ref<Partial<Movie>[]>([])
-  const isSearching = ref()
+  const isSearching = ref(false)
   const error = ref(false)
   const isEmptyList = ref(false)
 
