@@ -1,4 +1,5 @@
-import type { Movie, Result } from '@/types/movieList.interface'
+import type { Movie } from '@/types/movie.interface'
+import type { Result } from '@/types/movieList.interface'
 
 export const getMoviesApi = async (searchTerm: string): Promise<Partial<Movie>[]> => {
   const url = `https://api.themoviedb.org/3/search/movie?query=${searchTerm}`
