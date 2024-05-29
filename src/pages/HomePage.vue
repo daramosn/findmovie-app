@@ -1,39 +1,66 @@
 <template>
-  <!-- Searchbox and filters-->
   <section>
-    <input type="text" v-model="searchInput" @keypress.enter="searchMovie" required />
-    <button @click="searchMovie">Search</button>
+    <h3>Enter movie name</h3>
+    <form class="searchform" @submit.prevent="searchMovie">
+      <input
+        type="text"
+        v-model="searchInput"
+        @keypress.enter="searchMovie"
+        required
+        placeholder="Avengers..."
+      />
+      <button @click="searchMovie">Search</button>
+    </form>
   </section>
 
-  <!-- Movies -->
-  <section class="movies-container">
-    <p v-if="isSearching">Searching...</p>
-    <p v-else-if="error">Sorry, there was an error.</p>
-    <p v-else-if="isEmptyList">Sorry, there's no results for {{ searchInput }}</p>
-    <ul v-else>
-      <li v-for="movie in movies" :key="movie.id">
-        <RouterLink :to="{ name: 'details', params: { id: movie.id } }">
-          <img :src="movie.poster_path" alt="movie" />
-        </RouterLink>
-        <div>
-          <small>{{ movie.release_date }}</small> <br />
-          <span>{{ movie.title }}</span>
-        </div>
-      </li>
-    </ul>
-  </section>
+  <MoviesContainer
+    :is-empty-list="isEmptyList"
+    :error="error"
+    :is-searching="isSearching"
+    :movies="movies"
+    :search-query="searchQuery"
+  />
 </template>
 
 <script lang="ts" setup>
-import { useMovies } from '@/composables/useMovie'
+// import SearchForm from '../components/SearchForm.vue'
+import MoviesContainer from '@/components/MoviesContainer.vue'
+import { useMovies } from '@/composables/useMovies'
+import { useRoute } from 'vue-router'
+const route = useRoute()
+const searchQuery = `${route.query.search}`
 
 const { isSearching, movies, searchInput, searchMovie, error, isEmptyList } = useMovies()
 </script>
 
 <style>
-main {
-  margin: 32px max(32px, calc((100vw - var(--body)) / 2));
+.searchform {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+  margin-block: 48px;
+  input {
+    font-size: 18px;
+    padding: 4px 8px;
+    border: none;
+    border-radius: 6px;
+  }
+  button {
+    border: none;
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 16px;
+    color: #fff;
+    background: linear-gradient(45deg, rgb(214, 94, 20), #db0000);
+    transition: all 0.1s ease-out;
+
+    &:hover {
+      scale: 1.05;
+      font-variation-settings: 'wght' 600;
+    }
+  }
 }
+
 .movies-container {
   ul {
     padding: 0;

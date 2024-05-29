@@ -1,18 +1,20 @@
 <template>
-  <div>
-    <h2>Details page</h2>
-  </div>
   <p v-if="isLoading">Loading...</p>
-  <section v-else-if="movieDetails">
+  <section class="movie-details" v-else-if="movieDetails">
     <img :src="movieDetails.poster_path" alt="poster" />
-    <p>{{ movieDetails.overview }}</p>
-    <p>{{ movieDetails.rating }}</p>
-    <p>{{ movieDetails.release_date }}</p>
+    <div class="data">
+      <h1>{{ movieDetails.title }}</h1>
+      <p>{{ movieDetails.overview }}</p>
+      <h4><i>Rating: </i> {{ movieDetails.rating }} ⭐</h4>
+      <h5>
+        <i>{{ movieDetails.release_date }} </i>
+      </h5>
+    </div>
   </section>
 </template>
 
 <script lang="ts" setup>
-import type { Movie } from '@/types/movieList.interface'
+import type { Movie } from '@/types/movie.interface'
 import { onMounted, ref } from 'vue'
 
 interface Props {
@@ -21,7 +23,6 @@ interface Props {
 
 const isLoading = ref(true)
 const movieDetails = ref<Movie>()
-
 const { id } = defineProps<Props>()
 
 const fetchDetails = async () => {
@@ -56,3 +57,57 @@ const fetchDetails = async () => {
 
 onMounted(fetchDetails)
 </script>
+
+<style>
+.movie-details {
+  display: grid;
+  grid-template-columns: 0.4fr 0.6fr;
+  gap: 32px;
+
+  img {
+    width: 100%;
+    aspect-ratio: 5/8;
+    object-fit: cover;
+    border-radius: 4px;
+    transition: all 0.2s ease-out;
+  }
+
+  .data {
+    h1 {
+      margin-top: 0;
+      font-size: clamp(60px, calc(8.654vw + 10.154px), 96px);
+      font-weight: 700;
+    }
+    p {
+      color: rgba(var(--color-rgb), 0.9);
+      font-size: 18px;
+    }
+  }
+}
+
+@media (width<768px) {
+  .movie-details {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+
+    img {
+      width: 50%;
+      min-width: 270px;
+      aspect-ratio: 5/8;
+    }
+
+    .data {
+      h1 {
+        margin-top: 0;
+        font-size: clamp(60px, calc(8.654vw + 10.154px), 96px);
+        font-weight: 600;
+      }
+      p {
+        color: rgba(var(--color-rgb), 0.9);
+        font-size: 16px;
+      }
+    }
+  }
+}
+</style>
