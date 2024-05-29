@@ -45,7 +45,7 @@ const fetchDetails = async () => {
     id: Number(id),
     title: data.title,
     release_date: data.release_date,
-    rating: data.vote_average,
+    rating: data.vote_average.toFixed(1),
     overview: data.overview,
     poster_path:
       data.poster_path === null
