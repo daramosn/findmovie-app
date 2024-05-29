@@ -2,7 +2,9 @@
   <section class="movies-container">
     <p v-if="isSearching">Searching...</p>
     <p v-else-if="error">Sorry, there was an error. 😿</p>
-    <p v-else-if="isEmptyList">Sorry, there's no results for {{ searchQuery }} 📽️</p>
+    <p v-else-if="isEmptyList">
+      Sorry, there's no results for <i>'{{ searchQuery }}'</i>
+    </p>
     <ul v-else>
       <li v-for="movie in movies" :key="movie.id">
         <RouterLink :to="{ name: 'details', params: { id: movie.id } }">
@@ -19,13 +21,14 @@
 
 <script lang="ts" setup>
 import type { Movie } from '@/types/movie.interface'
+import type { LocationQueryValue } from 'vue-router'
 
 interface Props {
   isSearching: boolean
   error: boolean
   isEmptyList: boolean
   movies: Partial<Movie>[]
-  searchQuery: string
+  searchQuery: LocationQueryValue | LocationQueryValue[]
 }
 
 const { error, isEmptyList, isSearching, movies, searchQuery } = defineProps<Props>()

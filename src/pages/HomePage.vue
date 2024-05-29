@@ -18,17 +18,15 @@
     :error="error"
     :is-searching="isSearching"
     :movies="movies"
-    :search-query="searchQuery"
+    :search-query="route.query.search"
   />
 </template>
 
 <script lang="ts" setup>
-// import SearchForm from '../components/SearchForm.vue'
 import MoviesContainer from '@/components/MoviesContainer.vue'
 import { useMovies } from '@/composables/useMovies'
 import { useRoute } from 'vue-router'
 const route = useRoute()
-const searchQuery = `${route.query.search}`
 
 const { isSearching, movies, searchInput, searchMovie, error, isEmptyList } = useMovies()
 </script>
