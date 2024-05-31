@@ -65,44 +65,4 @@ const { isSearching, movies, searchInput, searchMovie, error, isEmptyList } = us
     }
   }
 }
-
-.movies-container {
-  ul {
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr));
-    gap: 32px;
-
-    li {
-      list-style: none;
-      animation: fade-in 0.5s forwards cubic-bezier(0.44, -0.08, 0.34, 1.17);
-    }
-  }
-
-  img {
-    width: 100%;
-    aspect-ratio: 5/8;
-    object-fit: cover;
-    border-radius: 4px;
-    transition: all 0.2s ease-out;
-    &:hover {
-      scale: 1.03;
-    }
-  }
-
-  p {
-    font-size: 24px;
-  }
-}
-
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-    transform: translateY(-200);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 </style>

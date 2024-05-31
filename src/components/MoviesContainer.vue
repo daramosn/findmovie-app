@@ -44,7 +44,6 @@ const { error, isEmptyList, isSearching, movies, searchQuery } = defineProps<Pro
 
     li {
       list-style: none;
-      animation: fade-in 0.5s forwards cubic-bezier(0.44, -0.08, 0.34, 1.17);
     }
   }
 
@@ -61,17 +60,6 @@ const { error, isEmptyList, isSearching, movies, searchQuery } = defineProps<Pro
 
   p {
     font-size: 24px;
-  }
-}
-
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-    transform: translateY(-200);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
   }
 }
 </style>

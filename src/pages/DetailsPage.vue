@@ -1,7 +1,7 @@
 <template>
   <p v-if="isLoading">Loading...</p>
   <section class="movie-details" v-else-if="movieDetails">
-    <img :src="movieDetails.poster_path" alt="poster" />
+    <img :src="movieDetails.poster_path" alt="poster" :style="{ viewTransitionName: id }" />
     <div class="data">
       <h1>{{ movieDetails.title }}</h1>
       <p>{{ movieDetails.overview }}</p>
@@ -94,17 +94,13 @@ onMounted(fetchDetails)
     img {
       width: 50%;
       min-width: 270px;
-      aspect-ratio: 5/8;
     }
 
     .data {
       h1 {
-        margin-top: 0;
-        font-size: clamp(60px, calc(8.654vw + 10.154px), 96px);
         font-weight: 600;
       }
       p {
-        color: rgba(var(--color-rgb), 0.9);
         font-size: 16px;
       }
     }
